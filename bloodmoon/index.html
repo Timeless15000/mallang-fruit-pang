@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#07060a" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<title>혈월: 최후의 사냥꾼</title>
+<link rel="icon" href="./assets/img/i_moon.webp" />
+<link rel="preload" href="./assets/fonts/BlackHanSans.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="./assets/fonts/Pretendard-Bold.woff2" as="font" type="font/woff2" crossorigin />
+  <script type="module" crossorigin src="./assets/index-Dx1cTU6p.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-wz-oqmby.css">
+</head>
+<body>
+<div id="stage"></div>
+<div id="touch"></div>
+<div id="joy"><div id="joyBase"></div><div id="joyKnob"></div></div>
+
+<!-- 로딩 -->
+<section id="loading" class="screen show">
+  <div class="bgArt"></div>
+  <div class="logoWrap"><div class="logo">혈월</div><div class="logoSub">BLOOD MOON · 최후의 사냥꾼</div></div>
+  <div class="loadBar"><i id="loadFill"></i></div>
+  <div class="loadTxt" id="loadTxt">불러오는 중</div>
+</section>
+
+<!-- 홈 -->
+<section id="home" class="screen">
+  <div class="bgArt"></div>
+  <div class="topbar">
+    <div class="pill"><img src="./assets/img/coin.webp" alt="" /><b id="hGold">0</b></div>
+    <div class="topR">
+      <button class="iconBtn" id="btnDaily"><img src="./assets/img/chest.webp" alt="" /><span class="dot" id="dailyDot"></span></button>
+      <button class="iconBtn" id="btnMute"><svg viewBox="0 0 24 24" id="muteIc"></svg></button>
+    </div>
+  </div>
+  <div class="logoWrap home"><div class="logo">혈월</div><div class="logoSub">BLOOD MOON · 최후의 사냥꾼</div></div>
+  <div class="homeBottom">
+    <div class="chapCard">
+      <button class="chArrow" id="chPrev"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <img class="chEmblem" src="./assets/img/i_moon.webp" alt="" />
+      <div class="chInfo">
+        <div class="chNo" id="chNo">CHAPTER 1</div>
+        <div class="chName" id="chName">저주받은 광장</div>
+        <div class="chMeta" id="chMeta"></div>
+      </div>
+      <button class="chArrow" id="chNext"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      <div class="chLock" id="chLock"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg><span>이전 챕터를 클리어하세요</span></div>
+    </div>
+    <button class="cta" id="btnPlay"><span>사냥 시작</span></button>
+    <div class="homeRow">
+      <button class="sub" id="btnShop"><img src="./assets/img/i_atk.webp" alt="" /><span>강화</span></button>
+      <button class="sub" id="btnDaily2"><img src="./assets/img/i_gold.webp" alt="" /><span>일일 보급</span><span class="dot" id="dailyDot2"></span></button>
+    </div>
+  </div>
+  <div class="ver" id="ver"></div>
+</section>
+
+<!-- 강화 -->
+<section id="shop" class="screen">
+  <div class="shopBg"></div>
+  <div class="shopHead"><button class="iconBtn" id="shopBack"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><h2>사냥꾼 강화</h2><div class="pill"><img src="./assets/img/coin.webp" alt="" /><b id="sGold">0</b></div></div>
+  <div class="shopList" id="shopList"></div>
+</section>
+
+<!-- HUD -->
+<section id="hud" class="screen">
+  <div class="xpBar"><i id="xpFill"></i><div class="lvBadge" id="lvBadge">1</div></div>
+  <div class="hudTop">
+    <div class="hudL"><div class="stat"><svg viewBox="0 0 24 24" class="skull"><path d="M12 2C7 2 4 5.5 4 10c0 2.6 1.2 4.4 3 5.6V19a1 1 0 001 1h1v-2h2v2h2v-2h2v2h1a1 1 0 001-1v-3.4c1.8-1.2 3-3 3-5.6 0-4.5-3-8-8-8zm-3.5 11a2 2 0 110-4 2 2 0 010 4zm7 0a2 2 0 110-4 2 2 0 010 4z"/></svg><b id="kills">0</b></div></div>
+    <div class="timer" id="timer">00:00</div>
+    <div class="hudR"><div class="stat"><img src="./assets/img/coin.webp" alt="" /><b id="gold">0</b></div><button class="iconBtn sm" id="btnPause"><svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button></div>
+  </div>
+  <div class="goal" id="goal"></div>
+  <div class="bossBar" id="bossBar"><div class="bossName" id="bossName"></div><div class="bossTrack"><i id="bossHp"></i></div></div>
+  <div class="banner" id="banner"><b id="banT"></b><span id="banS"></span></div>
+  <div class="hint" id="hint">화면 아무 곳이나 끌어서 이동</div>
+</section>
+
+<!-- 레벨업 -->
+<section id="lvl" class="screen">
+  <div class="lvlHead"><div class="lvlKick">LEVEL UP</div><div class="lvlTitle" id="lvlTitle">레벨 2</div></div>
+  <div class="cards" id="cards"></div>
+  <div class="ownRow" id="ownRow"></div>
+</section>
+
+<!-- 보물 상자 -->
+<section id="chest" class="screen">
+  <div class="chestGlow"></div>
+  <img class="chestImg" src="./assets/img/chest.webp" alt="" />
+  <div class="chestTitle">보물 상자</div>
+  <div class="chestList" id="chestList"></div>
+  <div class="tapHint">탭하여 계속</div>
+</section>
+
+<!-- 일시정지 -->
+<section id="pause" class="screen">
+  <div class="modal">
+    <h3>일시정지</h3>
+    <div class="ownRow big" id="pauseOwn"></div>
+    <button class="cta small" id="btnResume"><span>계속하기</span></button>
+    <button class="ghost" id="btnQuit">사냥 포기</button>
+  </div>
+</section>
+
+<!-- 일일 보급 -->
+<section id="daily" class="screen">
+  <div class="modal">
+    <img class="dailyChest" src="./assets/img/chest.webp" alt="" />
+    <h3>일일 보급</h3>
+    <p class="mSub">매일 접속하면 보상이 커집니다</p>
+    <div class="days" id="days"></div>
+    <button class="cta small" id="btnClaim"><span id="claimTxt">받기</span></button>
+    <button class="ghost" id="btnDailyClose">닫기</button>
+  </div>
+</section>
+
+<!-- 결과 -->
+<section id="result" class="screen">
+  <div class="modal result">
+    <div class="rKick" id="rKick"></div>
+    <h3 id="rTitle"></h3>
+    <div class="rStats">
+      <div><span>생존 시간</span><b id="rTime"></b></div>
+      <div><span>처치</span><b id="rKills"></b></div>
+      <div><span>레벨</span><b id="rLv"></b></div>
+      <div><span>골드</span><b id="rGold" class="goldTxt"></b></div>
+    </div>
+    <div class="ownRow" id="rOwn"></div>
+    <button class="cta small" id="btnAgain"><span>다시 사냥</span></button>
+    <div class="rRow"><button class="ghost" id="btnRShop">강화</button><button class="ghost" id="btnHome">홈으로</button></div>
+  </div>
+</section>
+<div id="flash"></div>
+</body>
+</html>
